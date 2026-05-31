@@ -1,0 +1,68 @@
+[
+    {
+        "topic": "TOPICS 1 - QUESTION #161",
+        "question": "A recent audit revealed that a new network was created in your GCP project. In this network, a GCE instance has an SSH port open to the world. You want to discover this network's origin. What should you do?",
+        "options": [
+            "Search for \"Create VM\" entry in the Stackdriver alerting console",
+            "Navigate to the Activity page in the Home section. Set category to Data Access and search for \"Create VM\" entry",
+            "In the Logging section of the console, specify \"GCE Network\" as the logging section. Search for the \"Create Insert\" entry",
+            "Connect to the GCE instance using project SSH keys. Identify previous logins in system logs, and match these with the project owners list"
+        ],
+        "answerIndex": 2,
+        "explanation": "這題重點是 Cloud Audit Logs 的 Admin Activity。要追查誰建立了網路，應在 Cloud Logging 查 GCE Network 相關的 create/insert 紀錄。"
+    },
+    {
+        "topic": "TOPICS 1 - QUESTION #162",
+        "question": "You want to make a copy of a production Linux virtual machine in the US-Central region. You want to manage and replace the copy easily if there are changes on the production virtual machine. You will deploy the copy as a new instance in a different project in the US-East region. What steps must you take?",
+        "options": [
+            "Use the Linux dd and netcat commands to copy and stream the root disk contents to a new virtual machine instance in the US-East region.",
+            "Create a snapshot of the root disk and select the snapshot as the root disk when you create a new virtual machine instance in the US-East region.",
+            "Create an image file from the root disk with the Linux dd command, create a new virtual machine instance in the US-East region.",
+            "Create a snapshot of the root disk, create an image file in Google Cloud Storage from the snapshot, and create a new virtual machine instance in the US-East region using the image file as the root disk."
+        ],
+        "answerIndex": 3,
+        "explanation": "題目要求跨專案、跨區域且方便替換。以 snapshot 建立可分享與版本化的 image，再用 image 建新 VM 最符合需求，因此選 D。"
+    },
+    {
+        "topic": "TOPICS 1 - QUESTION #163",
+        "question": "Your company runs several databases on a single MySQL instance. They need to take backups of a specific database at regular intervals. The backup activity needs to complete as quickly as possible and cannot be allowed to impact disk performance. How should you configure the storage?",
+        "options": [
+            "Configure a cron job to use the gcloud tool to take regular backups using persistent disk snapshots.",
+            "Mount a Local SSD volume as the backup location. After the backup is complete, use gsutil to move the backup to Google Cloud Storage.",
+            "Use gcsfuse to mount a Google Cloud Storage bucket as a volume directly on the instance and write backups to the mounted location using mysqldump.",
+            "Mount additional persistent disk volumes onto each virtual machine (VM) instance in a RAID10 array and use LVM to create snapshots to send to Cloud Storage."
+        ],
+        "answerIndex": 0,
+        "explanation": "Persistent Disk snapshot 可快速建立時間點備份，後續由底層儲存系統處理，對執行中磁碟效能衝擊較小，因此選 A。"
+    },
+    {
+        "topic": "TOPICS 1 - QUESTION #164",
+        "question": "You are helping the QA team to roll out a new load-testing tool to test the scalability of your primary cloud services that run on Google Compute Engine with Cloud Bigtable. Which three requirements should they include? (Choose three.)",
+        "options": [
+            "Ensure that the load tests validate the performance of Cloud Bigtable",
+            "Create a separate Google Cloud project to use for the load-testing environment",
+            "Schedule the load-testing tool to regularly run against the production environment",
+            "Ensure all third-party systems your services use is capable of handling high load",
+            "Instrument the production services to record every transaction for replay by the load-testing tool",
+            "Instrument the load-testing tool and the target services with detailed logging and metrics collection"
+        ],
+        "answerIndices": [
+            0,
+            1,
+            5
+        ],
+        "explanation": "正解是 A、B、F：要驗證 Bigtable 效能、隔離測試環境避免影響正式環境，並建立完整 metrics/logging 觀測能力。"
+    },
+    {
+        "topic": "TOPICS 1 - QUESTION #165",
+        "question": "Your customer is moving their corporate applications to Google Cloud Platform. The security team wants detailed visibility of all projects in the organization. You provision the Google Cloud Resource Manager and set up yourself as the org admin. What Google Cloud Identity and Access Management (Cloud IAM) roles should you give to the security team?",
+        "options": [
+            "Org viewer, project owner",
+            "Org viewer, project viewer",
+            "Org admin, project browser",
+            "Project owner, network admin"
+        ],
+        "answerIndex": 1,
+        "explanation": "要讓安全團隊可見全組織專案且遵守最小權限，應給 Org Viewer 與 Project Viewer，因此選 B。"
+    }
+]

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam Practice Viewer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <main class="page">
+        <section class="card">
+            <header class="card-head">
+                <span id="topicTag" class="topic-tag">TOPIC</span>
+                <span id="progressText" class="progress">1 / 1</span>
+            </header>
+
+            <div class="divider"></div>
+
+            <article>
+                <h1 id="questionText" class="question">題目載入中...</h1>
+                <ul id="optionsList" class="options"></ul>
+            </article>
+
+            <section id="analysisBox" class="analysis hidden" aria-live="polite">
+                <h2>答案解析</h2>
+                <p id="answerText"></p>
+                <p id="explanationText"></p>
+            </section>
+
+            <footer class="actions">
+                <button id="overviewBtn" class="ghost-btn" type="button">Overview</button>
+                <button id="prevBtn" class="ghost-btn" type="button">Previous</button>
+                <button id="nextBtn" class="next-btn" type="button">Next</button>
+            </footer>
+
+            <section id="overviewPanel" class="overview hidden" aria-live="polite">
+                <div class="overview-head">
+                    <h2>Overview</h2>
+                    <button id="closeOverviewBtn" class="ghost-btn" type="button">Close</button>
+                </div>
+                <div id="overviewGrid" class="overview-grid"></div>
+            </section>
+        </section>
+    </main>
+
+    <script src="app.js" defer></script>
+</body>
+
+</html>
