@@ -47,6 +47,37 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.date-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.date-selector label {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.date-selector select {
+    padding: 8px 12px;
+    border: 1.5px solid var(--option-border);
+    background: var(--option);
+    color: var(--ink);
+    border-radius: 8px;
+    font-family: "Barlow", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    flex: 1;
+    min-width: 120px;
 }
 
 .topic-tag {
@@ -250,6 +281,19 @@ body {
     .card {
         min-height: auto;
         padding: 4px 2px;
+    }
+
+    .date-selector {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .date-selector label {
+        font-size: 0.95rem;
+    }
+
+    .date-selector select {
+        font-size: 1rem;
     }
 
     .topic-tag {

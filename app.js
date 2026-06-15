@@ -1,6 +1,9 @@
+let allQuestionsData = {};
 let questions = [];
 let currentStep = 0;
+let selectedDate = null;
 
+const dateSelect = document.getElementById("dateSelect");
 const topicTag = document.getElementById("topicTag");
 const progressText = document.getElementById("progressText");
 const questionText = document.getElementById("questionText");
@@ -114,26 +117,60 @@ async function loadQuestions() {
         if (!response.ok) {
             throw new Error("無法讀取題庫 JSON");
         }
-        questions = await response.json();
+        allQuestionsData = await response.json();
 
-        if (!Array.isArray(questions) || questions.length === 0) {
+        if (typeof allQuestionsData !== 'object' || Object.keys(allQuestionsData).length === 0) {
             throw new Error("題庫資料為空");
         }
 
-        questions = questions.map((item) => ({
-            ...item,
-            answerIndices: normalizeAnswerIndices(item)
-        }));
+        // 初始化日期選擇器
+        initDateSelector();
 
-        currentStep = 0;
-        renderByStep();
+        // 選擇第一個日期
+        const firstDate = Object.keys(allQuestionsData).sort()[0];
+        selectDate(firstDate);
     } catch (error) {
         questionText.textContent = `載入失敗：${error.message}`;
         optionsList.innerHTML = "";
         prevBtn.disabled = true;
         nextBtn.disabled = true;
         overviewBtn.disabled = true;
+        dateSelect.disabled = true;
     }
+}
+
+function initDateSelector() {
+    dateSelect.innerHTML = "";
+    const dates = Object.keys(allQuestionsData).sort();
+
+    dates.forEach((date) => {
+        const option = document.createElement("option");
+        option.value = date;
+        option.textContent = date;
+        dateSelect.appendChild(option);
+    });
+
+    dateSelect.addEventListener("change", (e) => {
+        selectDate(e.target.value);
+    });
+}
+
+function selectDate(date) {
+    selectedDate = date;
+    dateSelect.value = date;
+
+    const questionsArray = allQuestionsData[date];
+    if (!Array.isArray(questionsArray)) {
+        throw new Error("選定日期的題庫資料格式錯誤");
+    }
+
+    questions = questionsArray.map((item) => ({
+        ...item,
+        answerIndices: normalizeAnswerIndices(item)
+    }));
+
+    currentStep = 0;
+    renderByStep();
 }
 
 function renderQuestion(showAnswer) {
@@ -215,4 +252,14 @@ prevBtn.addEventListener("click", handlePrev);
 nextBtn.addEventListener("click", handleNext);
 overviewBtn.addEventListener("click", openOverview);
 closeOverviewBtn.addEventListener("click", closeOverview);
+
+// 新增方向鍵事件監聽
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") {
+        handlePrev();
+    } else if (e.key === "ArrowRight") {
+        handleNext();
+    }
+});
+
 loadQuestions();
