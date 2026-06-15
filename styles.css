@@ -75,9 +75,10 @@ body {
 
 .question {
     margin: 0 0 10px;
-    font-size: clamp(2.5rem, 4.8vw, 4rem);
+    font-size: clamp(2.5rem, 4vw, 3rem);
     line-height: 1.35;
     font-weight: 700;
+    white-space: pre-wrap;
 }
 
 .options {
@@ -94,7 +95,7 @@ body {
     border-radius: 14px;
     padding: 14px 18px;
     color: #2f3b5e;
-    font-size: clamp(1.7rem, 2.8vw, 2.35rem);
+    font-size: clamp(1rem, 2vw, 2rem);
     font-weight: 500;
     line-height: 1.4;
 }
@@ -116,14 +117,15 @@ body {
 
 .analysis h2 {
     margin: 0 0 8px;
-    font-size: 2.15rem;
+    font-size: 2rem;
 }
 
 .analysis p {
     margin: 6px 0;
     line-height: 1.45;
-    font-size: 1.85rem;
+    font-size: 2rem;
     color: #2f3b5e;
+    white-space: pre-wrap;
 }
 
 .hidden {
